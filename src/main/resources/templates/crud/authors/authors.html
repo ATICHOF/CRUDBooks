@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Authors</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+<body>
+<div class="container my-5 text-center">
+<h1>Authors CRUD</h1>
+<hr>
+<a th:href="@{/addauthor}" class="btn btn-outline-primary mx-1"><i class="bi bi-plus"></i>Add</a>
+<hr>
+<table class="table table-striped align-middle">
+	<thead>
+		<tr>
+			<td>First Name</td>
+			<td>Last Name</td>
+			<td>Gender</td>
+			<td>Contact</td>
+			<td width="15%"></td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="author : ${listAuthor}">
+			<td th:text="${author.firstname}"></td>
+			<td th:text="${author.lastname}"></td>
+			<!--<td th:text="${author.gender}"></td>-->
+			<td>
+				<span th:if="${author.gender == 'Male'}">
+					<svg xmlns="http://www.w3.org/2000/svg" stroke="#469ce3" stroke-width=".2" width="16" height="16" fill="#469ce3" class="bi bi-gender-male" viewBox="0 0 16 16">
+					<path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/>
+					</svg> Male
+				</span>
+    			<span th:unless="${author.gender == 'Male'}">
+    				<svg xmlns="http://www.w3.org/2000/svg" stroke="#e346cb" stroke-width=".2" width="16" height="16" fill="#e346cb" class="bi bi-gender-female" viewBox="0 0 16 16">
+  					<path fill-rule="evenodd" d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z"/>
+					</svg> Female
+				</span>
+			</td>
+			<td th:text="${author.phone}"></td>
+			<td>
+				<a th:href="@{/updateauthor/{id}(id=${author.id})}" class="btn btn-outline-primary mb-1">Modify</a>
+				<a th:href="@{/deleteauthor/{id}(id=${author.id})}" class="btn btn-outline-danger mb-1" onclick="return confirm('Are you sure?')">Delete</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</body>
+</html>
